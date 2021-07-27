@@ -10,9 +10,6 @@ install_requires = [
     "attrs",
     "pydantic[dotenv]",
     "stac_pydantic==2.0.*",
-    "stac-fastapi.types",
-    "stac-fastapi.api",
-    "stac-fastapi.extensions",
     "sqlakeyset",
     "geoalchemy2<0.8.0",
     "sqlalchemy==1.3.23",
@@ -20,6 +17,12 @@ install_requires = [
     "psycopg2-binary",
     "alembic",
     "fastapi-utils",
+    "uvicorn",
+    "brotli-asgi",
+    "orjson",
+    "stac-fastapi.types",
+    "stac-fastapi.api",
+    "stac-fastapi.extensions",
 ]
 
 extra_reqs = {
@@ -53,7 +56,7 @@ setup(
     author_email="engineering@arturo.ai",
     url="https://github.com/stac-utils/stac-fastapi",
     license="MIT",
-    packages=find_namespace_packages(exclude=["alembic", "tests", "scripts"]),
+    packages=['stac_fastapi.types.sqlalchemy', 'stac_fastapi.types.sqlalchemy.models', 'stac_fastapi.types.sqlalchemy.types'],
     zip_safe=False,
     install_requires=install_requires,
     tests_require=extra_reqs["dev"],
