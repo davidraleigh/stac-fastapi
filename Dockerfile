@@ -16,9 +16,7 @@ COPY . /app
 
 ENV PATH=$PATH:/install/bin
 
-RUN mkdir -p /install && \
-    pip install -e ./stac_fastapi/api[dev]   && \
-    pip install -e ./stac_fastapi/types[dev]  && \
-    pip install -e ./stac_fastapi/extensions[dev,tiles]  && \
-    pip install -e ./stac_fastapi/sqlalchemy[dev,server] && \
-    pip install -e ./stac_fastapi/pgstac[dev,server]
+# only installing sqlalchemy
+WORKDIR /app/stac_fastapi/sqlalchemy
+RUN pip install -r requirements.txt && \
+    python setup.py install

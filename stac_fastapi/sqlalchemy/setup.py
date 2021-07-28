@@ -1,10 +1,9 @@
 """stac_fastapi: sqlalchemy module."""
 
-from setuptools import find_namespace_packages, setup
+from setuptools import setup
 
 with open("README.md") as f:
     desc = f.read()
-
 install_requires = [
     "fastapi",
     "attrs",
@@ -56,7 +55,9 @@ setup(
     author_email="engineering@arturo.ai",
     url="https://github.com/stac-utils/stac-fastapi",
     license="MIT",
-    packages=['stac_fastapi.types.sqlalchemy', 'stac_fastapi.types.sqlalchemy.models', 'stac_fastapi.types.sqlalchemy.types'],
+    packages=['stac_fastapi.sqlalchemy',
+              'stac_fastapi.sqlalchemy.models',
+              'stac_fastapi.sqlalchemy.types'],
     zip_safe=False,
     install_requires=install_requires,
     tests_require=extra_reqs["dev"],

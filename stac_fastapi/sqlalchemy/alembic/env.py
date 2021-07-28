@@ -1,9 +1,9 @@
 """Migration environment."""
-import os
 from logging.config import fileConfig
 
 from alembic import context
 from sqlalchemy import engine_from_config, pool
+from stac_fastapi.sqlalchemy.config import SqlalchemySettings
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
@@ -30,11 +30,12 @@ def get_connection_url() -> str:
     Get connection URL from environment variables
     (see environment variables set in docker-compose)
     """
-    postgres_user = os.environ["POSTGRES_USER"]
-    postgres_pass = os.environ["POSTGRES_PASS"]
-    postgres_host = os.environ["POSTGRES_HOST"]
-    postgres_port = os.environ["POSTGRES_PORT"]
-    postgres_dbname = os.environ["POSTGRES_DBNAME"]
+    settings = SqlalchemySettings()
+    postgres_user = settings.postgres_user
+    postgres_pass = settings.postgres_pass
+    postgres_host = settings.postgres_host_writer
+    postgres_port = settings.postgres_port
+    postgres_dbname = settings.postgres_dbname
     return f"postgresql://{postgres_user}:{postgres_pass}@{postgres_host}:{postgres_port}/{postgres_dbname}"
 
 
